@@ -4,7 +4,7 @@ import { Message } from '../model/message';
 import { Event } from '../model/event';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:3000';
+const SERVER_URL = 'http://localhost:8080';
 
 @Injectable({
     providedIn: 'root'

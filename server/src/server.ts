@@ -10,7 +10,12 @@ export class ChatServer {
     public static readonly PORT: number = 8080;
     private app: express.Application = express();
     private server = http.createServer(this.app);
-    private io = new Server(this.server);
+    private io = new Server(this.server , {
+        cors: {
+            origin: "http://localhost:4200",
+            methods: ["GET", "POST"]
+          }
+    });
 
     constructor() {
 
