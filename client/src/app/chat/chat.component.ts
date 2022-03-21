@@ -10,7 +10,7 @@ import { SocketService } from './shared/services/socket .service';
 @Component({
   selector: 'tcc-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
   action = Action;
