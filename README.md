@@ -1,6 +1,6 @@
 # awesome-chat
 Awesome Full  Chatting  App
-#Roadmap
+# Roadmap
  - adding login with username to show in sending message
  - adding basic ui for one to one chatting
  - adding rooms in backend
