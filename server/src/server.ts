@@ -1,8 +1,9 @@
 import express from "express";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import http from "http";
 import dotenv from 'dotenv';
 import { Message } from './model/message.model';
+import { User } from "./model/user.model";
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ export class ChatServer {
         cors: {
             origin: "*",
             methods: ["GET", "POST"]
-          }
+        }
     });
 
     constructor() {
@@ -28,8 +29,8 @@ export class ChatServer {
         this.server.listen(ChatServer.PORT, () => {
             console.log('Running server on port %s', ChatServer.PORT);
         });
-        this.io.on('connect', (socket: any) => {
-            console.log('Connected client on port %s.', ChatServer.PORT);
+        this.io.on('connect', (socket: Socket) => {
+            console.log('Connected client  %s.', socket.id);
             socket.on('message', (m: Message) => {
                 console.log('[server](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);

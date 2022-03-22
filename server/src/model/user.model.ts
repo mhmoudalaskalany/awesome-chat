@@ -1,3 +1,3 @@
-export class User {
-    constructor(private name: string) { }
+export interface User {
+    name?: string;
 }

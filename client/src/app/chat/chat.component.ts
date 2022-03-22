@@ -14,7 +14,9 @@ import { SocketService } from './shared/services/socket .service';
 })
 export class ChatComponent implements OnInit {
   action = Action;
-  user: User;
+  user: User = {
+    name: 'mahmoud alaskalany'
+  };
   message;
   messages: Message[] = [];
   messageContent: string;
@@ -52,30 +54,11 @@ export class ChatComponent implements OnInit {
     }
 
     this.socketService.send({
-      from: this.user,
+      user: this.user,
       content: this.message
     });
     this.messageContent = null;
   }
 
-  public sendNotification(params: any, action: Action): void {
-    let message: Message;
 
-    if (action === Action.JOINED) {
-      message = {
-        from: this.user,
-        action: action
-      }
-    } else if (action === Action.RENAME) {
-      message = {
-        action: action,
-        content: {
-          username: this.user.name,
-          previousUsername: params.previousUsername
-        }
-      };
-    }
-
-    this.socketService.send(message);
-  }
 }
