@@ -7,7 +7,7 @@ Awesome Full  Chatting  App
  - adding rooms ui
  - adding adding room permissions
  - add support for WebRTC
- - adding support for real time camera streaming from nsp server
+ - adding support for real time camera streaming from rtsp server
 # How To Run
  - run backend server using  npm run server it will run the server on port 8080 you can change it as you wish but make sure to change it in client also.
  - run client using npm run start .
