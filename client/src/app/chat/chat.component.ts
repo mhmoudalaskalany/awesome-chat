@@ -15,6 +15,7 @@ import { SocketService } from './shared/services/socket .service';
 export class ChatComponent implements OnInit {
   action = Action;
   user: User;
+  message;
   messages: Message[] = [];
   messageContent: string;
   ioConnection: any;
@@ -30,6 +31,7 @@ export class ChatComponent implements OnInit {
 
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
+        console.log(message);
         this.messages.push(message);
       });
 
@@ -44,14 +46,14 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  public sendMessage(message: string): void {
-    if (!message) {
+  public sendMessage(): void {
+    if (!this.message) {
       return;
     }
 
     this.socketService.send({
       from: this.user,
-      content: message
+      content: this.message
     });
     this.messageContent = null;
   }
