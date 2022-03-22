@@ -1,0 +1,6 @@
+<button (click)="sendMessage()">send Test</button>
+<input type="text" name="message" id="message" [(ngModel)]="message">
+
+<div *ngIf="messages">
+    <h1 *ngFor="let message of messages">{{ message.user?.name }}:{{ message.content }}</h1>
+</div>

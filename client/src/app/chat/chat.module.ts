@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatComponent } from './chat.component';
+import { PrivateChatComponent } from './components/private-chat/private-chat.component';
+import { RtspStreamComponent } from './components/rtsp-stream/rtsp-stream.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material/material.module';
 
@@ -8,7 +9,8 @@ import { MaterialModule } from '../shared/material/material.module';
 
 @NgModule({
   declarations: [
-    ChatComponent
+    PrivateChatComponent,
+    RtspStreamComponent
   ],
   imports: [
     CommonModule,

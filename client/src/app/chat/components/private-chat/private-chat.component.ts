@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Action } from './shared/model/action';
-import { Event } from './shared/model/event';
-import { Message } from './shared/model/message';
-import { User } from './shared/model/user';
-import { SocketService } from './shared/services/socket .service';
+import { Action } from '../../shared/model/action';
+import { Event } from '../../shared/model/event';
+import { Message } from '../../shared/model/message';
+import { User } from '../../shared/model/user';
+import { SocketService } from '../../shared/services/socket .service';
 
 
 @Component({
-  selector: 'tcc-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  selector: 'private-chat',
+  templateUrl: './private-chat.component.html',
+  styleUrls: ['./private-chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class PrivateChatComponent implements OnInit {
   action = Action;
   user: User = {
     name: 'mahmoud alaskalany'
