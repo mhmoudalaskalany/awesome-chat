@@ -10,9 +10,9 @@ export class ChatServer {
     public static readonly PORT: number = 8080;
     private app: express.Application = express();
     private server = http.createServer(this.app);
-    private io = new Server(this.server , {
+    private io = new Server(this.server, {
         cors: {
-            origin: "http://localhost:4200",
+            origin: "*",
             methods: ["GET", "POST"]
           }
     });
@@ -28,11 +28,11 @@ export class ChatServer {
         this.server.listen(ChatServer.PORT, () => {
             console.log('Running server on port %s', ChatServer.PORT);
         });
-
         this.io.on('connect', (socket: any) => {
             console.log('Connected client on port %s.', ChatServer.PORT);
             socket.on('message', (m: Message) => {
                 console.log('[server](message): %s', JSON.stringify(m));
+                debugger;
                 this.io.emit('message', m);
             });
 
