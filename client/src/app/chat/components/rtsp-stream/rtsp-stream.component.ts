@@ -1,64 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 
-import { Action } from '../../shared/model/action';
-import { Event } from '../../shared/model/event';
-import { Message } from '../../shared/model/message';
-import { User } from '../../shared/model/user';
 import { SocketService } from '../../shared/services/socket .service';
-
+import { loadPlayer, Player } from 'rtsp-relay/browser';
 
 @Component({
   selector: 'rtsp-stream',
   templateUrl: './rtsp-stream.component.html',
   styleUrls: ['./rtsp-stream.component.scss']
 })
-export class RtspStreamComponent implements OnInit {
-  action = Action;
-  user: User = {
-    name: 'mahmoud alaskalany'
-  };
-  message;
-  messages: Message[] = [];
-  messageContent: string;
-  ioConnection: any;
+export class RtspStreamComponent implements AfterViewInit {
+  player?: Player;
+  @ViewChild('videoPlayer')
+  videoPlayer?: ElementRef<HTMLCanvasElement>;
+  constructor() { }
 
-  constructor(private socketService: SocketService) { }
+  async ngAfterViewInit() {
+    // this will wait until the connection is established
+    this.player = await loadPlayer({
+      url: 'ws://localhost:3000/api/stream/1',
+      canvas: this.videoPlayer!.nativeElement,
 
-  ngOnInit(): void {
-    this.initIoConnection();
-  }
-
-  private initIoConnection(): void {
-    this.socketService.initSocket();
-
-    this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        console.log(message);
-        this.messages.push(message);
-      });
-
-    this.socketService.onEvent(Event.CONNECT)
-      .subscribe(() => {
-        console.log('connected');
-      });
-
-    this.socketService.onEvent(Event.DISCONNECT)
-      .subscribe(() => {
-        console.log('disconnected');
-      });
-  }
-
-  public sendMessage(): void {
-    if (!this.message) {
-      return;
-    }
-
-    this.socketService.send({
-      user: this.user,
-      content: this.message
+      // optional
+      onDisconnect: () => console.log('Connection lost!'),
     });
-    this.messageContent = null;
+
+    console.log('Connected!', this.player);
   }
+
 
 
 }
